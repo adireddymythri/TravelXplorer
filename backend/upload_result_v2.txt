@@ -1,0 +1,10 @@
+﻿Uploading C:\Users\nagam\Downloads\adurru-buddhist-stupa_kakinada.webp to Cloudinary...
+
+--- UPLOAD SUCCESSFUL ---
+Copy this into your seedKakinada.js "images" array:
+{
+  "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771602681/travelxplorer/places/lp21ajzvyxr4hpgruawm.webp",
+  "publicId": "travelxplorer/places/lp21ajzvyxr4hpgruawm"
+}
+-------------------------
+

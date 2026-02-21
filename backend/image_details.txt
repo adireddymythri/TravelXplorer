@@ -1,0 +1,18 @@
+--- Nemam Beach Images ---
+[
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771494247/travelxplorer/places/jozzjsmnpp9qxpn83w79.avif",
+    "publicId": "travelxplorer/places/jozzjsmnpp9qxpn83w79",
+    "_id": "6996e60942841ed95a330ac5",
+    "id": "6996e60942841ed95a330ac5"
+  }
+]
+--- Yanam Images ---
+[
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771493808/travelxplorer/places/v2jwdokxrkaj9unsyvoi.avif",
+    "publicId": "travelxplorer/places/v2jwdokxrkaj9unsyvoi",
+    "_id": "6996e60942841ed95a330acb",
+    "id": "6996e60942841ed95a330acb"
+  }
+]

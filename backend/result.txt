@@ -1,0 +1,10 @@
+Uploading C:\Users\nagam\Downloads\yanam-beach.avif to Cloudinary...
+
+--- UPLOAD SUCCESSFUL ---
+Copy this into your seedKakinada.js "images" array:
+{
+  "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771493808/travelxplorer/places/v2jwdokxrkaj9unsyvoi.avif",
+  "publicId": "travelxplorer/places/v2jwdokxrkaj9unsyvoi"
+}
+-------------------------
+

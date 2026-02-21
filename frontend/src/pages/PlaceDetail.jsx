@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { getPlaceById, getNearbyPlaces, addReview, toggleFavorite } from '../services/api';
+import { getPlaceById, getNearbyPlaces, addReview, toggleFavorite, getWeather } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 export default function PlaceDetail() {
@@ -13,8 +13,16 @@ export default function PlaceDetail() {
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
   const [submitting, setSubmitting] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [weather, setWeather] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
 
   useEffect(() => {
+    // Clear state for new place
+    setPlace(null);
+    setNearby([]);
+    setWeather(null);
+    setLoading(true);
+
     getPlaceById(id)
       .then((res) => setPlace(res.data.data))
       .catch(() => setPlace(null))
@@ -28,6 +36,33 @@ export default function PlaceDetail() {
         .catch(() => setNearby([]));
     }
   }, [place, id]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (place?.location?.coordinates) {
+      const [lng, lat] = place.location.coordinates;
+      setWeatherLoading(true);
+
+      getWeather(lat, lng)
+        .then((res) => {
+          if (isMounted) setWeather(res.data.data);
+        })
+        .catch(() => {
+          if (isMounted) setWeather(null);
+        })
+        .finally(() => {
+          if (isMounted) setWeatherLoading(false);
+        });
+    } else {
+      setWeather(null);
+      setWeatherLoading(false);
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [place]);
 
   const handleReview = async (e) => {
     e.preventDefault();
@@ -86,9 +121,24 @@ export default function PlaceDetail() {
 
   const images = place.images?.length ? place.images : [{ url: 'https://via.placeholder.com/800x400?text=No+Image' }];
   const mainImg = images[selectedImage]?.url || images[0]?.url;
+  // GeoJSON: coordinates are [longitude, latitude]
   const [lng, lat] = place.location?.coordinates || [];
-  const mapsUrl = lat && lng ? `https://www.google.com/maps?q=${lat},${lng}` : null;
-  const embedUrl = lat && lng ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${lat},${lng}&zoom=14` : null;
+  const hasCoords = typeof lat === 'number' && typeof lng === 'number';
+
+  // Use place name + address - Google Maps finds the correct place from its database
+  // More reliable than coordinates when DB coords might be wrong for some places
+  const placeSearchQuery = encodeURIComponent(
+    `${place.name}, ${place.address || ''}, ${place.district?.name || ''} Andhra Pradesh, India`
+  );
+
+  // View on Maps & Get Directions: Search by place name so Google pinpoints the right location
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${placeSearchQuery}`;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${placeSearchQuery}&travelmode=driving`;
+
+  // Embedded map: Use coordinates when available, otherwise show fallback
+  const embedSrc = hasCoords
+    ? `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.015},${lat - 0.01},${lng + 0.015},${lat + 0.01}&layer=mapnik&marker=${lat}%2C${lng}`
+    : null;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -104,9 +154,8 @@ export default function PlaceDetail() {
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i)}
-                  className={`flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImage === i ? 'border-primary-500 ring-2 ring-primary-200' : 'border-transparent opacity-70 hover:opacity-100'
-                  }`}
+                  className={`flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all ${selectedImage === i ? 'border-primary-500 ring-2 ring-primary-200' : 'border-transparent opacity-70 hover:opacity-100'
+                    }`}
                 >
                   <img src={img.url} alt="" className="w-full h-full object-cover" />
                 </button>
@@ -144,17 +193,39 @@ export default function PlaceDetail() {
             <span className="px-3 py-1 rounded-full bg-primary-100 text-primary-600 font-medium">{place.category}</span>
           </div>
 
-          {/* Weather placeholder + quick info */}
-          <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-xl bg-white/70 text-base">
-            <div className="flex items-center gap-2 text-gray-700">
-              <span className="text-2xl">☀️</span>
-              <span>28°C - Sunny</span>
+          {/* Real Weather Info */}
+          <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-xl bg-white/70 text-base shadow-sm border border-white/50">
+            <div className="flex items-center gap-2 text-gray-700 min-w-[150px]">
+              {weatherLoading ? (
+                <div className="flex gap-2 items-center animate-pulse">
+                  <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                  <div className="w-16 h-4 bg-gray-200 rounded" />
+                </div>
+              ) : weather ? (
+                <>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${weather.icon}.png`}
+                    alt={weather.condition}
+                    className="w-10 h-10 -my-2"
+                  />
+                  <div>
+                    <span className="font-bold text-lg">{weather.temp}°C</span>
+                    <span className="text-sm block text-gray-500 capitalize">{weather.condition}</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <span className="text-2xl">☁️</span>
+                  <span>Weather N/A</span>
+                </>
+              )}
             </div>
             <span>Entry: {place.entryFee} {place.entryFeeAmount > 0 && `₹${place.entryFeeAmount}`}</span>
             <span>Best: {place.bestSeason?.join(', ')}</span>
             {mapsUrl && (
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-primary-600 font-medium hover:underline">
-                View full map →
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-primary-600 font-medium hover:underline flex items-center gap-1">
+                <span>View on Maps</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
               </a>
             )}
           </div>
@@ -166,12 +237,12 @@ export default function PlaceDetail() {
             <div><strong className="text-gray-700">Days:</strong> {place.operationalDays}</div>
             <div className="sm:col-span-2"><strong className="text-gray-700">Address:</strong> {place.address}</div>
             {place.dressCode && <div><strong className="text-gray-700">Dress Code:</strong> {place.dressCode}</div>}
-            {place.restrictions && <div><strong className="text-gray-700">Restrictions:</strong> {place.restrictions}</div>}
+            {place.specialRules?.length > 0 && <div><strong className="text-gray-700">Rules:</strong> {place.specialRules.join(', ')}</div>}
           </div>
 
-          {place.localFoodRecommendations?.length > 0 && (
+          {place.foodRecommendations?.length > 0 && (
             <div className="mt-4 p-4 rounded-xl bg-amber-50/70 border border-amber-200/50">
-              <strong>Local Food:</strong> {place.localFoodRecommendations.join(', ')}
+              <strong>Local Food:</strong> {place.foodRecommendations.join(', ')}
             </div>
           )}
 
@@ -182,9 +253,9 @@ export default function PlaceDetail() {
             >
               Plan Itinerary
             </Link>
-            {mapsUrl && (
+            {directionsUrl && (
               <a
-                href={mapsUrl}
+                href={directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-glass"
@@ -196,25 +267,63 @@ export default function PlaceDetail() {
         </div>
       </div>
 
-      {/* Map link - opens Google Maps */}
-      {lat && lng && (
-        <div className="mt-8 card overflow-hidden p-0">
-          <a
-            href={mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block aspect-video bg-gradient-to-br from-primary-100 to-cyan-100 relative group"
-          >
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <span className="text-5xl">🗺️</span>
-              <span className="px-4 py-2 rounded-xl bg-white/90 font-semibold text-base text-gray-800 shadow-lg group-hover:scale-105 transition-transform">
-                View on Google Maps
-              </span>
-              <span className="text-base text-gray-600">Get directions</span>
-            </div>
-          </a>
+      {/* Map & Directions */}
+      <div className="mt-8 card overflow-hidden p-0 border-none shadow-xl animate-scale-in">
+        <div className="bg-white p-4 border-b border-gray-100 flex flex-wrap justify-between items-center gap-3">
+          <div>
+            <h3 className="font-bold text-gray-800 text-lg flex items-center gap-2">
+              <span className="text-primary-600">📍</span> {place.name}
+            </h3>
+            <p className="text-sm text-gray-500 line-clamp-1">{place.address}</p>
+          </div>
+          <div className="flex gap-2">
+            <a
+              href={directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-primary-600 text-white rounded-xl text-sm font-bold hover:bg-primary-700 transition-colors"
+            >
+              Get Directions
+            </a>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors"
+            >
+              View on Maps
+            </a>
+          </div>
         </div>
-      )}
+        {embedSrc ? (
+          <div className="aspect-video w-full bg-slate-100">
+            <iframe
+              title={`Map: ${place.name}`}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src={embedSrc}
+            />
+          </div>
+        ) : (
+          <div className="aspect-video w-full bg-slate-100 flex items-center justify-center p-8 text-center">
+            <div>
+              <p className="text-slate-500 mb-3">Exact location not available on map</p>
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-primary-600 text-white rounded-xl text-sm font-bold hover:bg-primary-700 transition-colors inline-block"
+              >
+                Open in Google Maps
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="mt-8 card p-6">
         <h2 className="text-xl md:text-2xl font-bold mb-4">Reviews</h2>

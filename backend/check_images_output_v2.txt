@@ -1,0 +1,131 @@
+--- Current Images in DB ---
+Place: Coringa Wildlife Sanctuary
+Images: [
+  {
+    "url": "https://images.unsplash.com/photo-1590012357632-15f16f9f6874?q=80&w=1200",
+    "publicId": "seed/coringa_01",
+    "_id": "69987b6e2b4b33978d8bfdab",
+    "id": "69987b6e2b4b33978d8bfdab"
+  }
+]
+---------------------------
+Place: Uppada Beach
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771497810/travelxplorer/places/mxgyqbsxtkqjotxye1w8.webp",
+    "publicId": "travelxplorer/places/mxgyqbsxtkqjotxye1w8",
+    "_id": "69987b6e2b4b33978d8bfdae",
+    "id": "69987b6e2b4b33978d8bfdae"
+  }
+]
+---------------------------
+Place: Annavaram Satyanarayana Swamy Temple
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771493808/travelxplorer/places/annavaram_placeholder.jpg",
+    "publicId": "travelxplorer/places/annavaram_placeholder",
+    "_id": "69987b6e2b4b33978d8bfdb1",
+    "id": "69987b6e2b4b33978d8bfdb1"
+  }
+]
+---------------------------
+Place: Kakinada Beach / Beach Road
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771513416/travelxplorer/places/dyhpem2278fujoumf3aa.jpg",
+    "publicId": "travelxplorer/places/dyhpem2278fujoumf3aa",
+    "_id": "69987b6e2b4b33978d8bfdb4",
+    "id": "69987b6e2b4b33978d8bfdb4"
+  }
+]
+---------------------------
+Place: Hope Island
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771579311/travelxplorer/places/dtdt99wbzixj53qbv4tq.avif",
+    "publicId": "travelxplorer/places/dtdt99wbzixj53qbv4tq",
+    "_id": "69987b6e2b4b33978d8bfdba",
+    "id": "69987b6e2b4b33978d8bfdba"
+  }
+]
+---------------------------
+Place: Yanam Riverside & Confluence Point
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771493808/travelxplorer/places/v2jwdokxrkaj9unsyvoi.avif",
+    "publicId": "travelxplorer/places/v2jwdokxrkaj9unsyvoi",
+    "_id": "69987b6e2b4b33978d8bfdbd",
+    "id": "69987b6e2b4b33978d8bfdbd"
+  }
+]
+---------------------------
+Place: Nemam Beach
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771494247/travelxplorer/places/jozzjsmnpp9qxpn83w79.avif",
+    "publicId": "travelxplorer/places/jozzjsmnpp9qxpn83w79",
+    "_id": "69987b6e2b4b33978d8bfdb7",
+    "id": "69987b6e2b4b33978d8bfdb7"
+  }
+]
+---------------------------
+Place: Draksharamam Bheemeshwara Swamy Temple
+Images: [
+  {
+    "url": "https://res.cloudinary.com/yourcloudname/image/upload/vXXXXXXXX/temples/draksharamam.jpg",
+    "publicId": "travelxplorer/temples/draksharamam",
+    "_id": "69987b6e2b4b33978d8bfdc0",
+    "id": "69987b6e2b4b33978d8bfdc0"
+  }
+]
+---------------------------
+Place: Sri Kukkuteswara Swamy Temple
+Images: [
+  {
+    "url": "https://res.cloudinary.com/yourcloudname/image/upload/vXXXXXXXX/temples/kukkuteswara.jpg",
+    "publicId": "travelxplorer/temples/kukkuteswara",
+    "_id": "69987b6e2b4b33978d8bfdc3",
+    "id": "69987b6e2b4b33978d8bfdc3"
+  }
+]
+---------------------------
+Place: Sri Veera Venkata Satyanarayana Swamy Temple (Pithapuram)
+Images: [
+  {
+    "url": "https://res.cloudinary.com/yourcloudname/image/upload/vXXXXXXXX/temples/pithapuram_satyanarayana.jpg",
+    "publicId": "travelxplorer/temples/pithapuram_satyanarayana",
+    "_id": "69987b6e2b4b33978d8bfdc6",
+    "id": "69987b6e2b4b33978d8bfdc6"
+  }
+]
+---------------------------
+Place: Sri Subrahmanya Swamy Temple (Samalkot)
+Images: [
+  {
+    "url": "https://res.cloudinary.com/yourcloudname/image/upload/vXXXXXXXX/temples/subrahmanya_samalkot.jpg",
+    "publicId": "travelxplorer/temples/subrahmanya_samalkot",
+    "_id": "69987b6e2b4b33978d8bfdc9",
+    "id": "69987b6e2b4b33978d8bfdc9"
+  }
+]
+---------------------------
+Place: Sri Bhavanarayana Swamy Temple
+Images: [
+  {
+    "url": "https://res.cloudinary.com/yourcloudname/image/upload/vXXXXXXXX/temples/bhavanarayana.jpg",
+    "publicId": "travelxplorer/temples/bhavanarayana",
+    "_id": "69987b6e2b4b33978d8bfdcc",
+    "id": "69987b6e2b4b33978d8bfdcc"
+  }
+]
+---------------------------
+Place: Sri Kodanda Rama Swamy Temple
+Images: [
+  {
+    "url": "https://res.cloudinary.com/yourcloudname/image/upload/vXXXXXXXX/temples/kodanda_rama.jpg",
+    "publicId": "travelxplorer/temples/kodanda_rama",
+    "_id": "69987b6e2b4b33978d8bfdcf",
+    "id": "69987b6e2b4b33978d8bfdcf"
+  }
+]
+---------------------------

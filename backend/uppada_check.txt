@@ -1,0 +1,18 @@
+--- Nemam Beach Images ---
+[
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771494247/travelxplorer/places/jozzjsmnpp9qxpn83w79.avif",
+    "publicId": "travelxplorer/places/jozzjsmnpp9qxpn83w79",
+    "_id": "6996ea3359c7cf494dcb0715",
+    "id": "6996ea3359c7cf494dcb0715"
+  }
+]
+--- Uppada Beach Images ---
+[
+  {
+    "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200",
+    "publicId": "seed/uppada_01",
+    "_id": "6996ea3359c7cf494dcb070c",
+    "id": "6996ea3359c7cf494dcb070c"
+  }
+]

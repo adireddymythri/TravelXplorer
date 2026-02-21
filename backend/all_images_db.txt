@@ -1,0 +1,71 @@
+--- Current Images in DB ---
+Place: Coringa Wildlife Sanctuary
+Images: [
+  {
+    "url": "https://images.unsplash.com/photo-1590012357632-15f16f9f6874?q=80&w=1200",
+    "publicId": "seed/coringa_01",
+    "_id": "699828a4d8828dd6834b0344",
+    "id": "699828a4d8828dd6834b0344"
+  }
+]
+---------------------------
+Place: Uppada Beach
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771497810/travelxplorer/places/mxgyqbsxtkqjotxye1w8.webp",
+    "publicId": "travelxplorer/places/mxgyqbsxtkqjotxye1w8",
+    "_id": "699828a4d8828dd6834b0347",
+    "id": "699828a4d8828dd6834b0347"
+  }
+]
+---------------------------
+Place: Annavaram Satyanarayana Swamy Temple
+Images: [
+  {
+    "url": "https://images.unsplash.com/photo-1621213346487-198124230d7b?q=80&w=1200",
+    "publicId": "seed/annavaram_01",
+    "_id": "699828a4d8828dd6834b034a",
+    "id": "699828a4d8828dd6834b034a"
+  }
+]
+---------------------------
+Place: Kakinada Beach / Beach Road
+Images: [
+  {
+    "url": "https://images.unsplash.com/photo-1545562083-a50684f00938?q=80&w=1200",
+    "publicId": "seed/kakinada_beach_01",
+    "_id": "699828a4d8828dd6834b034d",
+    "id": "699828a4d8828dd6834b034d"
+  }
+]
+---------------------------
+Place: Hope Island
+Images: [
+  {
+    "url": "https://images.unsplash.com/photo-1506929199175-609cf38f615e?q=80&w=1200",
+    "publicId": "seed/hope_island_01",
+    "_id": "699828a4d8828dd6834b0353",
+    "id": "699828a4d8828dd6834b0353"
+  }
+]
+---------------------------
+Place: Yanam Riverside & Confluence Point
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771493808/travelxplorer/places/v2jwdokxrkaj9unsyvoi.avif",
+    "publicId": "travelxplorer/places/v2jwdokxrkaj9unsyvoi",
+    "_id": "699828a4d8828dd6834b0356",
+    "id": "699828a4d8828dd6834b0356"
+  }
+]
+---------------------------
+Place: Nemam Beach
+Images: [
+  {
+    "url": "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771494247/travelxplorer/places/jozzjsmnpp9qxpn83w79.avif",
+    "publicId": "travelxplorer/places/jozzjsmnpp9qxpn83w79",
+    "_id": "699828a4d8828dd6834b0350",
+    "id": "699828a4d8828dd6834b0350"
+  }
+]
+---------------------------

@@ -50,4 +50,7 @@ export const adminGetReviews = () => api.get('/admin/reviews');
 export const adminApproveReview = (id) => api.put(`/admin/reviews/${id}/approve`);
 export const adminDeleteReview = (id) => api.delete(`/admin/reviews/${id}`);
 
+// Misc
+export const getWeather = (lat, lon) => api.get('/misc/weather', { params: { lat, lon } });
+
 export default api;

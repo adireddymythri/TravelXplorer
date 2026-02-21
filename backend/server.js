@@ -12,6 +12,7 @@ import districtRoutes from './routes/districtRoutes.js';
 import itineraryRoutes from './routes/itineraryRoutes.js';
 import recommendationRoutes from './routes/recommendationRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import miscRoutes from './routes/miscRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -29,6 +30,7 @@ app.use('/api/districts', districtRoutes);
 app.use('/api/itinerary', itineraryRoutes);
 app.use('/api/recommendations', recommendationRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/misc', miscRoutes);
 
 app.use(errorHandler);
 

@@ -74,15 +74,29 @@ const placeSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    restrictions: {
-      type: String,
-      default: '',
-    },
-    localFoodRecommendations: [
+    specialRules: [
       {
         type: String,
       },
     ],
+    foodRecommendations: [
+      {
+        type: String,
+      },
+    ],
+    nearbyAttractions: [
+      {
+        type: String,
+      },
+    ],
+    crowdLevel: {
+      type: String,
+      default: 'Medium',
+    },
+    weatherSensitive: {
+      type: Boolean,
+      default: false,
+    },
     images: [
       {
         url: String,

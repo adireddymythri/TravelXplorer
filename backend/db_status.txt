@@ -1,0 +1,38 @@
+Connected to MongoDB...
+Total Places in DB: 7
+- Coringa Wildlife Sanctuary (District: Kakinada) - Images: 1
+- Uppada Beach (District: Kakinada) - Images: 1
+- Annavaram Satyanarayana Swamy Temple (District: Kakinada) - Images: 1
+- Kakinada Beach / Beach Road (District: Kakinada) - Images: 1
+- Hope Island (District: Kakinada) - Images: 1
+- Yanam Riverside & Confluence Point (District: Kakinada) - Images: 1
+- Nemam Beach (District: Kakinada) - Images: 1
+Total Districts in DB: 28
+- Ananthapur
+- Chittoor
+- East Godavari
+- Guntur
+- Kadapa
+- Krishna
+- Kurnool
+- Nellore
+- Prakasam
+- Srikakulam
+- Visakhapatnam
+- Vizianagaram
+- West Godavari
+- Alluri Sitharama Raju
+- Anakapalli
+- Annamayya
+- Bapatla
+- Eluru
+- Kakinada
+- Konaseema
+- NTR
+- Palnadu
+- Parvathipuram Manyam
+- Sri Potti Sriramulu Nellore
+- Sri Sathya Sai
+- Tirupati
+- Nandyal
+- Anantapur

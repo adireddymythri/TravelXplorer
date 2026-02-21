@@ -2,8 +2,53 @@ import Place from '../models/Place.js';
 import District from '../models/District.js';
 import Review from '../models/Review.js';
 import asyncHandler from '../utils/asyncHandler.js';
-import { generateItinerary } from '../services/itineraryService.js';
-import { getRecommendations } from '../services/recommendationService.js';
+import { uploadFromBuffer, deleteImage } from '../utils/cloudinary.js';
+
+/**
+ * @route   POST /api/admin/places/:id/images
+ * @desc    Upload images for a place
+ */
+export const uploadPlaceImages = asyncHandler(async (req, res) => {
+  const place = await Place.findById(req.params.id);
+  if (!place) {
+    res.status(404);
+    throw new Error('Place not found');
+  }
+
+  if (!req.files || req.files.length === 0) {
+    res.status(400);
+    throw new Error('Please upload at least one image');
+  }
+
+  const uploadPromises = req.files.map((file) => uploadFromBuffer(file.buffer));
+  const results = await Promise.all(uploadPromises);
+
+  place.images.push(...results);
+  await place.save();
+
+  res.json({ success: true, data: place.images });
+});
+
+/**
+ * @route   DELETE /api/admin/places/:id/images/:publicId
+ * @desc    Delete an image from a place
+ */
+export const deletePlaceImage = asyncHandler(async (req, res) => {
+  const place = await Place.findById(req.params.id);
+  if (!place) {
+    res.status(404);
+    throw new Error('Place not found');
+  }
+
+  // Remove from Cloudinary
+  await deleteImage(req.params.publicId);
+
+  // Remove from Database
+  place.images = place.images.filter((img) => img.publicId !== req.params.publicId);
+  await place.save();
+
+  res.json({ success: true, message: 'Image deleted' });
+});
 
 /**
  * @route   POST /api/admin/places
