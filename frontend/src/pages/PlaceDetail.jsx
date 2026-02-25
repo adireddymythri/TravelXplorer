@@ -125,20 +125,22 @@ export default function PlaceDetail() {
   const [lng, lat] = place.location?.coordinates || [];
   const hasCoords = typeof lat === 'number' && typeof lng === 'number';
 
-  // Use place name + address - Google Maps finds the correct place from its database
-  // More reliable than coordinates when DB coords might be wrong for some places
+  // Fallback search query if coordinates are missing
   const placeSearchQuery = encodeURIComponent(
     `${place.name}, ${place.address || ''}, ${place.district?.name || ''} Andhra Pradesh, India`
   );
 
-  // View on Maps & Get Directions: Search by place name so Google pinpoints the right location
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${placeSearchQuery}`;
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${placeSearchQuery}&travelmode=driving`;
+  // View on Maps & Get Directions: Use place name for navigation to ensure Google chooses the official POI entrance
+  // coordinates are used as a fallback.
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${placeSearchQuery}`;
 
-  // Embedded map: Use coordinates when available, otherwise show fallback
-  const embedSrc = hasCoords
-    ? `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.015},${lat - 0.01},${lng + 0.015},${lat + 0.01}&layer=mapnik&marker=${lat}%2C${lng}`
-    : null;
+  const mapsUrl = hasCoords
+    ? `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${placeSearchQuery}`;
+
+  // Embedded map: Use name-based search for better POI display (shows photos/reviews in map)
+  const embedQuery = encodeURIComponent(`${place.name}, ${place.district?.name || ''}`);
+  const embedSrc = `https://maps.google.com/maps?q=${embedQuery}&z=16&output=embed`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

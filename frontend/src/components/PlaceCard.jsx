@@ -1,10 +1,25 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toggleFavorite } from '../services/api';
 import toast from 'react-hot-toast';
 
-export default function PlaceCard({ place, isFavorite = false }) {
+export default function PlaceCard({ place, isFavorite: propIsFavorite }) {
   const { user } = useAuth();
+
+  // Local state for immediate UI feedback
+  const [fav, setFav] = useState(false);
+
+  // Sync with user favorites or prop
+  useEffect(() => {
+    if (propIsFavorite !== undefined) {
+      setFav(propIsFavorite);
+    } else if (user?.favorites) {
+      const isFav = user.favorites.some(f => (f._id || f) === place._id);
+      setFav(isFav);
+    }
+  }, [user, place._id, propIsFavorite]);
+
   const imgUrl = place.images?.[0]?.url || 'https://via.placeholder.com/400x250?text=No+Image';
 
   const handleHeartClick = async (e) => {
@@ -14,12 +29,20 @@ export default function PlaceCard({ place, isFavorite = false }) {
       toast.error('Login to add favorites');
       return;
     }
+
+    // Optimistic UI update
+    const previousFav = fav;
+    setFav(!previousFav);
+
     try {
       await toggleFavorite(place._id);
-      toast.success(isFavorite ? 'Removed from favorites' : 'Added to favorites');
-      if (window.location.pathname === '/profile') window.location.reload();
+      toast.success(!previousFav ? 'Added to favorites' : 'Removed from favorites');
+      if (window.location.pathname === '/profile') {
+        setTimeout(() => window.location.reload(), 500);
+      }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed');
+      setFav(previousFav);
+      toast.error(err.response?.data?.message || 'Failed to update favorite');
     }
   };
 
@@ -56,8 +79,8 @@ export default function PlaceCard({ place, isFavorite = false }) {
         aria-label="Favorite"
       >
         <svg
-          className={`w-5 h-5 ${isFavorite ? 'text-red-500 fill-red-500' : 'text-slate-400 hover:text-red-400'}`}
-          fill={isFavorite ? 'currentColor' : 'none'}
+          className={`w-5 h-5 ${fav ? 'text-red-500 fill-red-500' : 'text-slate-400 hover:text-red-400'}`}
+          fill={fav ? 'currentColor' : 'none'}
           stroke="currentColor"
           viewBox="0 0 24 24"
         >

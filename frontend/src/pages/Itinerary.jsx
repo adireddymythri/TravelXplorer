@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { createItinerary, getDistricts } from '../services/api';
+import { Link, useSearchParams } from 'react-router-dom';
+import { createItinerary, getDistricts, savePlan, getPlanById } from '../services/api';
 import { CATEGORIES } from '../utils/constants';
+import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const CATEGORY_ICONS = {
   'Beaches & Coastal': '🏖️',
@@ -18,10 +20,33 @@ export default function Itinerary() {
   const [form, setForm] = useState({ districts: [], days: 3, interests: [] });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const { user } = useAuth();
+
+  const [searchParams] = useSearchParams();
+  const planId = searchParams.get('planId');
 
   useEffect(() => {
     getDistricts().then((res) => setDistricts(res.data.data || [])).catch(() => setDistricts([]));
   }, []);
+
+  useEffect(() => {
+    if (planId) {
+      setLoading(true);
+      getPlanById(planId)
+        .then((res) => {
+          const plan = res.data.data;
+          setResult(plan.itinerary);
+          setForm({
+            districts: plan.districts.map(d => d._id || d),
+            days: plan.days,
+            interests: [] // We don't strictly need this for display
+          });
+        })
+        .catch(() => toast.error('Failed to load plan'))
+        .finally(() => setLoading(false));
+    }
+  }, [planId]);
 
   const toggleDistrict = (id) => {
     setForm((f) => ({
@@ -48,6 +73,28 @@ export default function Itinerary() {
       setResult([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    if (!user) {
+      toast.error('Please login to save your plan');
+      return;
+    }
+    setSaveLoading(true);
+    try {
+      const title = `${form.days}-Day ${selectedDistrictNames} Trip`;
+      await savePlan({
+        title,
+        days: form.days,
+        itinerary: result,
+        districts: form.districts
+      });
+      toast.success('Itinerary saved to your plans!');
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to save plan');
+    } finally {
+      setSaveLoading(false);
     }
   };
 
@@ -116,9 +163,23 @@ export default function Itinerary() {
 
       {result && result.length > 0 && (
         <div className="space-y-8 animate-slide-up">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-800">
-            {form.days}-Day {selectedDistrictNames} Trip
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+              {form.days}-Day {selectedDistrictNames} Trip
+            </h2>
+            {!planId && (
+              <button
+                onClick={handleSave}
+                disabled={saveLoading}
+                className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white border-2 border-primary-600 text-primary-600 font-bold hover:bg-primary-50 transition-all disabled:opacity-50"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                </svg>
+                {saveLoading ? 'Saving...' : 'Save this Plan'}
+              </button>
+            )}
+          </div>
 
           {/* Timeline */}
           <div className="relative">

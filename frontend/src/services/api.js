@@ -35,8 +35,12 @@ export const toggleFavorite = (placeId) => api.put(`/users/favorites/${placeId}`
 // Districts
 export const getDistricts = () => api.get('/districts');
 
-// Itinerary
+// Itinerary & Plans
 export const createItinerary = (data) => api.post('/itinerary', data);
+export const savePlan = (data) => api.post('/plans', data);
+export const getMyPlans = () => api.get('/plans');
+export const getPlanById = (id) => api.get(`/plans/${id}`);
+export const deletePlan = (id) => api.delete(`/plans/${id}`);
 
 // Recommendations
 export const getRecommendations = (data) => api.post('/recommendations', data);

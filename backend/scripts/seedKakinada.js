@@ -105,7 +105,7 @@ const KAKINADA_PLACES = [
         operationalDays: "All Days",
         entryFee: "Free",
         entryFeeAmount: 0,
-        bestSeason: ["Winter", "Early Summer", "Post-Monsoon"],
+        bestSeason: ["Winter", "Summer"],
         images: [
             {
                 url: "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771494247/travelxplorer/places/jozzjsmnpp9qxpn83w79.avif",

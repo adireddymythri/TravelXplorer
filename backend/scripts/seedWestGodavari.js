@@ -218,56 +218,8 @@ const WEST_GODAVARI_PLACES = [
         location: { type: "Point", coordinates: [81.6625, 16.6110] },
         featured: false
     },
-    {
-        name: "Guntupalli Buddhist Caves",
-        description: "Guntupalli Buddhist Caves, located in Kamavarapukota Mandal, are among the earliest rock-cut Buddhist monuments in Andhra Pradesh dating back to the 3rd–2nd century BCE. Also known locally as 'Kudavelli' or 'Kudiveli' caves, the site features a rare circular (vritta) chaitya hall carved into rock, along with a large monastery complex, stupas, and meditation cells. The site reflects early Buddhist monastic architecture and is protected by the Archaeological Survey of India.",
-        category: "Historical & Archaeological",
-        address: "Guntupalli Village, Kamavarapukota Mandal, West Godavari District, Andhra Pradesh 534449",
-        timings: "9:00 AM – 5:00 PM",
-        operationalDays: "All Days",
-        entryFee: "Free",
-        entryFeeAmount: 0,
-        bestSeason: ["Winter", "Year-Round"],
-        images: [
-            {
-                url: "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771696038/travelxplorer/places/kfsmnnucbmgfsees9j7f.jpg",
-                publicId: "travelxplorer/places/kfsmnnucbmgfsees9j7f"
-            }
-        ],
-        dressCode: "Comfortable walking attire recommended",
-        specialRules: ["Do not damage rock structures", "Follow ASI guidelines", "Avoid littering"],
-        foodRecommendations: ["Carry drinking water", "Local Andhra meals in nearby towns"],
-        nearbyAttractions: ["Dwaraka Tirumala", "Kolleru Lake", "Eluru Buddha Park"],
-        crowdLevel: "Low to Medium",
-        weatherSensitive: true,
-        location: { type: "Point", coordinates: [81.1305, 17.0189] },
-        featured: true
-    },
-    {
-        name: "Rudramkota Archaeological Site",
-        description: "Rudramkota, located in Velairpadu region (near Polavaram project zone), is an important archaeological site dating back nearly 3,000 years to the Megalithic period. Excavations carried out during the Polavaram project revealed ancient burial sites, megalithic graves, terracotta artifacts, pottery, and iron objects. The discoveries provide significant evidence of early Iron Age habitation and cultural practices in the Godavari region.",
-        category: "Historical & Archaeological",
-        address: "Rudramkota Village, Near Polavaram Region, West Godavari District, Andhra Pradesh",
-        timings: "Open area – Accessible during daylight hours",
-        operationalDays: "All Days",
-        entryFee: "Free",
-        entryFeeAmount: 0,
-        bestSeason: ["Winter"],
-        images: [
-            {
-                url: "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771696091/travelxplorer/places/gkqmvb8hprjpflkvx2u5.jpg",
-                publicId: "travelxplorer/places/gkqmvb8hprjpflkvx2u5"
-            }
-        ],
-        dressCode: "Comfortable outdoor clothing",
-        specialRules: ["Excavation zone – Entry may be restricted", "Do not disturb archaeological remains"],
-        foodRecommendations: ["Carry food and water (limited facilities nearby)"],
-        nearbyAttractions: ["Polavaram Project Site", "Godavari River View Points"],
-        crowdLevel: "Low",
-        weatherSensitive: true,
-        location: { type: "Point", coordinates: [81.6435, 17.2502] },
-        featured: false
-    },
+
+
     {
         name: "Narasapuram Lace Park",
         description: "Narasapuram Lace Park is a dedicated handicrafts development center located in Narasapuram town on the banks of the Vasishta Godavari River. The park promotes the world-famous Narasapur crochet lace industry, which supports thousands of local women artisans. The lace products are exported internationally, and Narasapur Crochet Lace has received a Geographical Indication (GI) tag, recognizing its cultural and economic importance.",
@@ -369,29 +321,29 @@ const WEST_GODAVARI_PLACES = [
         featured: true
     },
     {
-        name: "YSTD Centre",
-        description: "YSTD Centre is a well-known commercial and retail complex located on Mini Bypass Road in Kovvur. The center offers diverse shopping outlets and essential services catering to the daily needs of residents. It acts as a convenient local retail hub for Kovvur and surrounding areas.",
-        category: "Shopping Malls",
-        address: "Mini Bypass Road, Kovvur, West Godavari District, Andhra Pradesh 534350",
-        timings: "9:00 AM – 9:00 PM",
+        name: "Achanta Rameswara Swamy Temple",
+        description: "An ancient Shiva temple known for its historic architecture and religious importance in the region. The temple is famous for its unique construction and spiritual significance.",
+        category: "Temples & Religious",
+        address: "Achanta, West Godavari District, Andhra Pradesh",
+        timings: "5:30 AM – 8:30 PM",
         operationalDays: "All Days",
         entryFee: "Free",
         entryFeeAmount: 0,
-        bestSeason: ["Year-Round"],
+        bestSeason: ["Winter", "Maha Shivaratri"],
         images: [
             {
-                url: "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771697808/travelxplorer/places/zekchfn6sjoorwdo2bz2.jpg",
-                publicId: "travelxplorer/places/zekchfn6sjoorwdo2bz2"
+                url: "https://res.cloudinary.com/dv4dwdhsa/image/upload/v1771856255/travelxplorer/places/rpevarm9h6pp8qwvzm7g.jpg",
+                publicId: "travelxplorer/places/rpevarm9h6pp8qwvzm7g"
             }
         ],
-        dressCode: "Casual wear",
-        specialRules: ["Limited parking during peak hours"],
-        foodRecommendations: ["Local bakeries nearby", "Street food options on Mini Bypass Road"],
-        nearbyAttractions: ["Godavari River View Points", "Kovvur Railway Station", "Rajahmundry (across Godavari bridge)"],
-        crowdLevel: "Medium",
+        dressCode: "Traditional attire preferred",
+        specialRules: ["Maintain silence inside temple premises"],
+        foodRecommendations: ["Local eateries in Achanta"],
+        nearbyAttractions: ["Perupalem Beach", "Palakollu"],
+        crowdLevel: "High during Shivaratri",
         weatherSensitive: false,
-        location: { type: "Point", coordinates: [81.7333, 17.0167] },
-        featured: false
+        location: { type: "Point", coordinates: [81.8117, 16.5983] },
+        featured: true
     }
 ];
 
