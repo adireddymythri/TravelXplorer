@@ -38,7 +38,8 @@ const DISTRICTS = [
   { name: 'Kurnool', code: 'KNL', description: 'Belum Caves, Orvakal Rock Garden, history' },
   { name: 'Nandyal', code: 'NDL', description: 'Temples, hills, spiritual tourism' },
   { name: 'Anantapur', code: 'ATP', description: 'Lepakshi Temple, drought-resilient culture' },
-  { name: 'Sri Sathya Sai', code: 'SSS', description: 'Puttaparthi, spiritual and cultural tourism' }
+  { name: 'Sri Sathya Sai', code: 'SSS', description: 'Puttaparthi, spiritual and cultural tourism' },
+  { name: 'Dr. B.R. Ambedkar Konaseema', code: 'KSM', description: 'River Godavari hub, coconut groves, temples, scenic backwaters' }
 ];
 
 
